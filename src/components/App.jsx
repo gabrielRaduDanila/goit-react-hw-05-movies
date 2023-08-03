@@ -8,15 +8,17 @@ import MovieReviewsInfo from './pages-components/MovieReviewsInfo/MovieReviewsIn
 
 export const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<SharedLayout />}>
-        <Route index element={<Home />} />
+    <SharedLayout>
+      <Routes>
+        {/* <Route path="/" element={<SharedLayout />}> */}
+        <Route path="/" element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MoviesInfo />}>
           <Route path="cast" element={<MovieCastInfo />} />
           <Route path="reviews" element={<MovieReviewsInfo />} />
         </Route>
-      </Route>
-    </Routes>
+        {/* </Route> */}
+      </Routes>
+    </SharedLayout>
   );
 };

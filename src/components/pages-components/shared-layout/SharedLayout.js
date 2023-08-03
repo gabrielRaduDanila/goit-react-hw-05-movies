@@ -1,7 +1,7 @@
 import './SharedLayout.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
 
-const SharedLayout = () => {
+const SharedLayout = ({ children }) => {
   return (
     <div className="container">
       <header>
@@ -16,7 +16,8 @@ const SharedLayout = () => {
           </ul>
         </nav>
       </header>
-      <Outlet />
+      {/* <Outlet /> */}
+      {children}
     </div>
   );
 };
