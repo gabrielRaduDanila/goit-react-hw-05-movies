@@ -4,7 +4,6 @@ import { getTrendMovieUrl } from 'components/utils/utils';
 
 const Home = () => {
   const { isLoading, isError, data } = useFetchMovies(getTrendMovieUrl);
-
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
