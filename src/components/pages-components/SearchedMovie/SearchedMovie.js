@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import ErrorPage from '../Error';
+import NoResultFound from '../NoResultFound';
 
 const SearchedMovie = () => {
   const [searchParams] = useSearchParams();
@@ -34,17 +36,12 @@ const SearchedMovie = () => {
     return <Loading />;
   }
   if (isError) {
-    return <h2>Opps, there was a problem. Please try again</h2>;
+    return <ErrorPage />;
   }
   if (data) {
     const movies = data.results;
     if (movies.length === 0) {
-      return (
-        <h1>
-          No movie was found base on your search value, please try something
-          else
-        </h1>
-      );
+      return <NoResultFound />;
     }
     return (
       <div>

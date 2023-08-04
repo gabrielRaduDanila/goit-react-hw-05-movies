@@ -4,6 +4,8 @@ import { useFetchMovies } from 'components/utils/fetchMovies';
 import avatarImg from '../MovieCastInfo/avatartImage.png';
 import style from './MovieReviewsInfo.module.css';
 import Loading from '../Loading/Loading';
+import ErrorPage from '../Error';
+import { Empty } from 'antd';
 
 const MovieReviewsInfo = () => {
   const { movieId } = useParams();
@@ -15,14 +17,19 @@ const MovieReviewsInfo = () => {
     return <Loading />;
   }
   if (isError) {
-    return <h2>Opps, there was a problem. Please try again</h2>;
+    return <ErrorPage />;
   }
 
   if (data) {
     const reviewData = data.results;
 
     if (reviewData.length === 0) {
-      return <h2>No review for this movie</h2>;
+      return (
+        <div>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <h2 style={{ textAlign: 'center' }}>No review for this movie</h2>
+        </div>
+      );
     } else {
       return (
         <div>

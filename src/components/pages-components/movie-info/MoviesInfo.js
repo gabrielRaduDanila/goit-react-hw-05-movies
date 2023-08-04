@@ -3,19 +3,20 @@ import { API_KEY, BASE_URL } from 'components/utils/utils';
 import { useFetchMovies } from 'components/utils/fetchMovies';
 import style from './MovieInfo.module.css';
 import Loading from '../Loading/Loading';
+import ErrorPage from '../Error';
 
 const MoviesInfo = () => {
   const { movieId } = useParams();
   const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
   const { isLoading, isError, data } = useFetchMovies(url);
   const location = useLocation();
-  const backLink = location.state?.from ?? '/';
+  const backLink = location.state?.from ?? -2;
 
   if (isLoading) {
     return <Loading />;
   }
   if (isError) {
-    return <h2>Opps, there was a problem. Please try again</h2>;
+    return <ErrorPage />;
   }
   if (data) {
     const img = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
@@ -24,7 +25,7 @@ const MoviesInfo = () => {
     const userScore = Math.round(data.vote_average * 10);
     const genres = getGenres(data.genres);
     const defaultImg =
-      '<https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700>';
+      'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
     return (
       <main className={style.movieInfoContainer}>
         <Link to={backLink} className={style.movieInfoBtn}>

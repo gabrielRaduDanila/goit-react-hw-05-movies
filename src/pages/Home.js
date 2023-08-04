@@ -3,6 +3,7 @@ import { getTrendMovieUrl } from 'components/utils/utils';
 import { Link, useLocation } from 'react-router-dom';
 import Loading from 'components/pages-components/Loading/Loading';
 import ErrorPage from 'components/pages-components/Error';
+import NoResultFound from 'components/pages-components/NoResultFound';
 
 const Home = () => {
   const location = useLocation();
@@ -16,6 +17,9 @@ const Home = () => {
 
   if (data) {
     const movies = data.results;
+    if (movies.length === 0) {
+      return <NoResultFound />;
+    }
     return (
       <main className="home-main">
         <h1 className="home-title">trending today</h1>

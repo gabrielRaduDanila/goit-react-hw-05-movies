@@ -4,6 +4,8 @@ import { useFetchMovies } from 'components/utils/fetchMovies';
 import style from './MovieCastInfo.module.css';
 import avatarImg from './avatartImage.png';
 import Loading from '../Loading/Loading';
+import ErrorPage from '../Error';
+import { Empty } from 'antd';
 
 const MovieCastInfo = () => {
   const { movieId } = useParams();
@@ -15,11 +17,20 @@ const MovieCastInfo = () => {
     return <Loading />;
   }
   if (isError) {
-    return <h2>Opps, there was a problem. Please try again</h2>;
+    return <ErrorPage />;
   }
 
   if (data) {
     const cast = data.cast;
+
+    if (cast.length === 0) {
+      return (
+        <div>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          <h2 style={{ textAlign: 'center' }}>No cast for this movie</h2>
+        </div>
+      );
+    }
 
     return (
       <ul className={style.movieCastList}>

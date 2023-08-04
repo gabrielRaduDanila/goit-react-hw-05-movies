@@ -1,10 +1,18 @@
 import Home from 'pages/Home';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SharedLayout from './pages-components/shared-layout/SharedLayout';
 import Movies from '../pages/Movies';
-import MoviesInfo from './pages-components/movie-info/MoviesInfo';
-import MovieCastInfo from './pages-components/MovieCastInfo/MovieCastInfo';
-import MovieReviewsInfo from './pages-components/MovieReviewsInfo/MovieReviewsInfo';
+import ErrorPage from './pages-components/Error';
+const MoviesInfo = lazy(() =>
+  import('./pages-components/movie-info/MoviesInfo')
+);
+const MovieCastInfo = lazy(() =>
+  import('./pages-components/MovieCastInfo/MovieCastInfo')
+);
+const MovieReviewsInfo = lazy(() =>
+  import('./pages-components/MovieReviewsInfo/MovieReviewsInfo')
+);
 
 export const App = () => {
   return (
@@ -17,7 +25,7 @@ export const App = () => {
           <Route path="reviews" element={<MovieReviewsInfo />} />
         </Route>
 
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </SharedLayout>
   );
