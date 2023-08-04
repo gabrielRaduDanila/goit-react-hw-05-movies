@@ -4,8 +4,6 @@ import { useFetchMovies } from 'components/utils/fetchMovies';
 import avatarImg from '../MovieCastInfo/avatartImage.png';
 import style from './MovieReviewsInfo.module.css';
 
-// https://api.themoviedb.org/3/movie/{movie_id}/reviews
-
 const MovieReviewsInfo = () => {
   const { movieId } = useParams();
   const url = `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`;

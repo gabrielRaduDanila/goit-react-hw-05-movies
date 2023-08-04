@@ -1,8 +1,9 @@
-import { Movie } from '../components/Movie';
 import { useFetchMovies } from 'components/utils/fetchMovies';
 import { getTrendMovieUrl } from 'components/utils/utils';
+import { Link, useLocation } from 'react-router-dom';
 
 const Home = () => {
+  const location = useLocation();
   const { isLoading, isError, data } = useFetchMovies(getTrendMovieUrl);
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -17,12 +18,20 @@ const Home = () => {
       <main className="home-main">
         <h1 className="home-title">trending today</h1>
         <ul className="movies-list">
-          {movies.map((movie, index) => (
-            <Movie key={movie.id} index={index} movie={movie} />
-          ))}
+          {movies.map((movie, index) => {
+            return (
+              <li key={movie.id}>
+                <span>{index + 1}</span>
+                <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                  {movie.title || movie.name || movie.original_title}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </main>
     );
   }
 };
 export default Home;
+// to={`/movies/${movie.id}`} state={{ from: location }

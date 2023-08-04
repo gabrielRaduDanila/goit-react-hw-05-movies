@@ -4,9 +4,6 @@ import { useFetchMovies } from 'components/utils/fetchMovies';
 import style from './MovieCastInfo.module.css';
 import avatarImg from './avatartImage.png';
 
-// https://api.themoviedb.org/3/movie/{movie_id}/credits
-// https://image.tmdb.org/t/p/w500$
-
 const MovieCastInfo = () => {
   const { movieId } = useParams();
   const url = `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`;

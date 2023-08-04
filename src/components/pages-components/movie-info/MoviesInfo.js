@@ -1,4 +1,4 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { API_KEY, BASE_URL } from 'components/utils/utils';
 import { useFetchMovies } from 'components/utils/fetchMovies';
 import style from './MovieInfo.module.css';
@@ -7,6 +7,8 @@ const MoviesInfo = () => {
   const { movieId } = useParams();
   const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
   const { isLoading, isError, data } = useFetchMovies(url);
+  const location = useLocation();
+  const backLink = location.state?.from ?? '/';
 
   if (isLoading) {
     return <h2>Loading...</h2>;
@@ -14,21 +16,21 @@ const MoviesInfo = () => {
   if (isError) {
     return <h2>Opps, there was a problem. Please try again</h2>;
   }
-
   if (data) {
     const img = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
     const year = data.release_date ? data.release_date.split('-')[0] : 'N/A';
     const name = data.title || data.name;
     const userScore = Math.round(data.vote_average * 10);
     const genres = getGenres(data.genres);
-
+    const defaultImg =
+      '<https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700>';
     return (
       <main className={style.movieInfoContainer}>
-        <Link to={'/'} className={style.movieInfoBtn}>
+        <Link to={backLink} className={style.movieInfoBtn}>
           Go back
         </Link>
         <div className={style.movieInfo}>
-          <img src={img} alt={name} />
+          <img src={data.poster_path ? img : defaultImg} alt={name} />
           <div className={style.movieInfoText}>
             <h2>{name + ' ' + year}</h2>
             <p>User Score: {userScore}%</p>
@@ -69,4 +71,3 @@ function getGenres(arr) {
 }
 
 export default MoviesInfo;
-// .slice(0, -2)
