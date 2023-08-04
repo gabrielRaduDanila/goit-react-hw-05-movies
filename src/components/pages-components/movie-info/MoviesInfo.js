@@ -2,6 +2,7 @@ import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { API_KEY, BASE_URL } from 'components/utils/utils';
 import { useFetchMovies } from 'components/utils/fetchMovies';
 import style from './MovieInfo.module.css';
+import Loading from '../Loading/Loading';
 
 const MoviesInfo = () => {
   const { movieId } = useParams();
@@ -11,7 +12,7 @@ const MoviesInfo = () => {
   const backLink = location.state?.from ?? '/';
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loading />;
   }
   if (isError) {
     return <h2>Opps, there was a problem. Please try again</h2>;

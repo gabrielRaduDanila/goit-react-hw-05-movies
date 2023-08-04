@@ -2,6 +2,7 @@ import { API_KEY, BASE_URL } from 'components/utils/utils';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 const SearchedMovie = () => {
   const [searchParams] = useSearchParams();
@@ -30,7 +31,7 @@ const SearchedMovie = () => {
   }, [query]);
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loading />;
   }
   if (isError) {
     return <h2>Opps, there was a problem. Please try again</h2>;

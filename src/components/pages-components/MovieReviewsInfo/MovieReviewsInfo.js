@@ -3,6 +3,7 @@ import { API_KEY, BASE_URL } from 'components/utils/utils';
 import { useFetchMovies } from 'components/utils/fetchMovies';
 import avatarImg from '../MovieCastInfo/avatartImage.png';
 import style from './MovieReviewsInfo.module.css';
+import Loading from '../Loading/Loading';
 
 const MovieReviewsInfo = () => {
   const { movieId } = useParams();
@@ -11,7 +12,7 @@ const MovieReviewsInfo = () => {
   const { isLoading, isError, data } = useFetchMovies(url);
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loading />;
   }
   if (isError) {
     return <h2>Opps, there was a problem. Please try again</h2>;
