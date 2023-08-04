@@ -2,6 +2,7 @@ import { useFetchMovies } from 'components/utils/fetchMovies';
 import { getTrendMovieUrl } from 'components/utils/utils';
 import { Link, useLocation } from 'react-router-dom';
 import Loading from 'components/pages-components/Loading/Loading';
+import ErrorPage from 'components/pages-components/Error';
 
 const Home = () => {
   const location = useLocation();
@@ -10,7 +11,7 @@ const Home = () => {
     return <Loading />;
   }
   if (isError) {
-    return <h2>Opps, there was a problem. Please try again</h2>;
+    return <ErrorPage />;
   }
 
   if (data) {
