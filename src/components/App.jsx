@@ -16,17 +16,20 @@ const MovieReviewsInfo = lazy(() =>
 
 export const App = () => {
   return (
-    <SharedLayout>
-      <Routes>
-        <Route path="/" element={<Home />} />
+    // <SharedLayout>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Home />} />
         <Route path="/movies" element={<Movies />} />
+
         <Route path="movies/:movieId" element={<MoviesInfo />}>
           <Route path="cast" element={<MovieCastInfo />} />
           <Route path="reviews" element={<MovieReviewsInfo />} />
         </Route>
 
         <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </SharedLayout>
+      </Route>
+    </Routes>
+    // </SharedLayout>
   );
 };
