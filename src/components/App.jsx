@@ -16,7 +16,6 @@ const MovieReviewsInfo = lazy(() =>
 
 export const App = () => {
   return (
-    // <SharedLayout>
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route index element={<Home />} />
@@ -30,6 +29,5 @@ export const App = () => {
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
-    // </SharedLayout>
   );
 };
